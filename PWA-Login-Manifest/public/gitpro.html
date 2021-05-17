@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <title>Github Profile</title>
+    <script>
+        var person = prompt("Please enter your name");
+        var url='https://api.github.com/users/'+person;
+        fetch(url)
+        .then(Response=>Response.json())
+        .then(data=>{
+            console.log(data.avatar_url)
+            var im=document.getElementById("image");
+            im.setAttribute("src",data.avatar_url);
+
+            document.getElementById('name').innerHTML=person;
+            document.getElementById('link').setAttribute("href",data.html_url);
+            document.getElementById('link3').setAttribute("href",data.url);
+            document.getElementById('link2').setAttribute("href",data.followers_url);
+            document.getElementById('url').innerHTML=data.url;
+            document.getElementById('html_url').innerHTML=data.html_url;
+            document.getElementById('followers_url').innerHTML=data.followers_url;
+            document.getElementById('following_url').innerHTML=data.following_url;
+            document.getElementById('gists_url').innerHTML=data.gists_url;
+            document.getElementById('starred_url').innerHTML=data.starred_url;
+            document.getElementById('subscriptions_url').innerHTML=data.subscriptions_url;
+            document.getElementById('organizations_url').innerHTML=data.organizations_url;
+            document.getElementById('repos_url').innerHTML=data.repos_url;
+            document.getElementById('events_url').innerHTML=data.events_url;
+            document.getElementById('received_events_url').innerHTML=data.received_events_url;
+            document.getElementById('type').innerHTML=data.type;
+            document.getElementById('site_admin').innerHTML=data.site_admin;
+        })
+        .catch(function(response){
+            return response.status;
+            console.log(response.status);
+        });
+    </script>
+    <script>
+        if('serviceWorker' in navigator){
+            window.addEventListener('load',()=>{
+                navigator.serviceWorker.register('sw.js')
+            .then(registration =>{
+                console.log('service worker is registered',registration);
+            })
+            .catch(err =>{
+                console.log('Registration failed',err);
+            })
+            })
+        }
+    </script>
+    <script src="main.js"></script>
+    <style>
+        .mainBlock{
+            margin:100px;
+            width: 60vw;
+            display: flex;
+            height: 55vh;
+            border-radius:30px;
+        }
+        .one{
+            flex:0.3;
+            background-color:#345beb;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            align-items:flex-end;   
+            justify-content: space-around;
+        }
+        img{
+            width:150px;
+            height:150px;
+            border-radius: 75px;
+            margin:20px;
+        }
+        .two{
+            flex:0.7;   
+            background-color:#5679b3;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        p{
+            color:black;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        hr{
+            margin:0px; 
+        }
+        .infoOne{
+            display: flex;
+        }
+        .infoOneA{
+            flex:0.5;
+            align-items: center;
+        }
+        .infoOneB{
+            flex:0.5;
+            align-items: center;
+        } 
+        a{
+            text-decoration: none;
+            color:white;
+        }  
+        .more{
+            display:flex;
+            margin-left:300px;
+        }
+
+    </style>
+</head>
+<body>
+    <center>
+        <div class="mainBlock">
+            <div class="one">
+                <img src="" id="image" alt="profilePic" />
+                <p id="name"></p>
+            </div>
+            <div class="two"> 
+                <div>
+                    <p>
+                        Information
+                    </p>
+                    <hr>
+                    <hr>
+                    <hr>
+                </div>
+                <div class="infoOne"> 
+                    <div class="infoOneA">  
+                        <p>Profile Link</p>
+                    </div>
+                    <div class="infoOneB" >
+                        <p><a id="link" href=>Click Here</a></p>
+                    </div>
+                </div>
+                <div class="infoOne"> 
+                    <div class="infoOneA">  
+                        <p>Followers</p>
+                    </div>
+                    <div class="infoOneB" >
+                        <p><a id="link2" href="">Click Here</a></p>
+                    </div>
+                </div>
+                <div class="infoOne"> 
+                    <div class="infoOneA">  
+                        <p>More Details</p>
+                    </div>
+                    <div class="infoOneB" >
+                        <p><a id="link3" href="">Click Here</a></p>
+                    </div>
+                </div>
+        </div>
+    </center>
+    <div class="more">
+        <div class="partOne">
+            <p>
+                url
+            </p>
+            <p>
+                html_url
+            </p>
+            <p>
+                followers_url
+            </p>
+            <p>
+                following_url
+            </p>
+            <p>
+                gists_url
+            </p>
+            <p>
+                starred_url
+            </p>
+            <p>
+                subscriptions_url
+            </p>
+            <p>
+                organizations_url
+            </p>
+            <p>
+                repos_url
+            </p>
+            <p>
+                events_url
+            </p>
+            <p>
+                received_events_url
+            </p>
+            <p>
+                type
+            </p>
+            <p>
+                site_admin
+            </p>
+        </div>
+        <div class="partTwo">
+            <p id="url">
+                
+            </p>
+            <p id="html_url">
+                
+            </p>
+            <p id="followers_url">
+                
+            </p>
+            <p id="following_url">
+                
+            </p>
+            <p id="gists_url"> 
+                
+            </p>
+            <p id="starred_url">
+                
+            </p>
+            <p id="subscriptions_url">
+                
+            </p>
+            <p id="organizations_url">
+                
+            </p>
+            <p id="repos_url">
+                
+            </p>
+            <p id="events_url">
+                
+            </p>
+            <p id="received_events_url">
+                
+            </p>
+            <p id="type">
+             
+            </p>
+            <p id="site_admin">
+                
+            </p>
+        </div>
+    </div>
+</body>
+</html>
